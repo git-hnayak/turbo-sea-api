@@ -1,0 +1,21 @@
+{
+  "name": "turbo-sea",
+  "version": "1.0.0",
+  "description": "Turbo Sea Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hrushikesh N.",
+  "license": "ISC",
+  "dependencies": {
+    "config": "^2.0.1",
+    "debug": "^4.0.1",
+    "express": "^4.16.3",
+    "helmet": "^3.13.0",
+    "joi": "^13.6.0",
+    "mongoose": "^5.2.14",
+    "morgan": "^1.9.1",
+    "pug": "^2.0.3"
+  }
+}
