@@ -12,7 +12,7 @@ const usersRouter = require('./router/usersRouter');
 
 //Miscellaneous
 const app = express();
-const environment = app.get('env');
+const environment = app.get('env'); //Get Environment variable NODE_ENV
 const port = process.env.PORT || 4004;
 
 //DB Connection

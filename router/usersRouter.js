@@ -11,7 +11,7 @@ router.post('/', (req, res) => {
     } else {
         usersUtil.createUser(req)
         .then((result) => {
-            res.send(result);
+            res.send('User Craeted Successfully');
         }).catch((err) => {
             res.status(400).send(err);
         });

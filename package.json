@@ -9,6 +9,7 @@
   "author": "Hrushikesh N.",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.0",
     "config": "^2.0.1",
     "debug": "^4.0.1",
     "express": "^4.16.3",
