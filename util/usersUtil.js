@@ -53,8 +53,6 @@ const bcryptPassword = (user) => {
                 reject(err)
             } else {
                 resolve(hash);
-                // user.password = hash;
-                // return saveUser(user);
             }
         })
     })
