@@ -26,7 +26,6 @@ const findAllUsers = () => {
             .select({_id: 0, password: 0})
             .then(result => resolve(result))
             .catch((err) => {
-                debug(err);
                 reject(err)
             });
     })
