@@ -37,24 +37,36 @@ const findUserByPhone = (phone) => {
         UserModel.find({ phone })
             .select({_id: 0, password: 0})
             .then(result => {
-                debug(result);
                 resolve(result);
             }).catch((err) => {
-                debug(err);
                 reject(err)
             });
     })
 }
 
+const checkExistingUser = (phone) => {
+    return new Promise((resolve, reject) => {
+        findUserByPhone(phone)
+        .then((result) => {
+            if (result.length > 0) {
+                reject('User already exist...');
+            } else {
+                resolve(result);;
+            }
+        }).catch((err) => {
+            reject(err)
+        });
+    })
+}
+
 const bcryptPassword = (user) => {
+    debug('Calling becrypt..');
     return new Promise((resolve, reject) => {
         bcrypt.hash(user.password, saltRound, (err, hash) => {
             if (err) {
                 reject(err)
             } else {
                 resolve(hash);
-                // user.password = hash;
-                // return saveUser(user);
             }
         })
     })
@@ -72,19 +84,18 @@ const saveNewUser = (user) => {
 const createUser = (req) => {
     const user = req.body;
     return new Promise((resolve, reject) => {
-        findUserByPhone(user.phone).then((result) => {
-            if (result.length > 0) {
-                reject('User already exist...');
-            } else {
-                bcryptPassword(user);
-            }
+        checkExistingUser(user.phone)
+        .then((result) => {
+            return bcryptPassword(user);
         })
         .then((hash) => {
             user.password = hash;
-            saveNewUser(user)
-        }).then((res) => {
+            return saveNewUser(user);
+        })
+        .then((res) => {
             resolve(res);
-        }).catch(error => {
+        })
+        .catch(error => {
             reject(error);
         }) 
     });
