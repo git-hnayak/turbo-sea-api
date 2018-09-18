@@ -5,6 +5,10 @@ const helmet = require('helmet');
 const debug = require('debug')('app:startup');
 const morgan = require('morgan');
 const pug = require('pug');
+const config = require('config');
+
+const secret = config.get('secret_key');
+console.log('Secret Key: ', secret);
 
 //Router modules
 const homeRouter = require('./router/homeRouter');

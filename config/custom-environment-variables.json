@@ -1,0 +1,3 @@
+{
+   "secret_key": "SECRET_KEY" //here SECRET_KEY is from the environment variable
+}

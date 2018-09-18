@@ -3,7 +3,7 @@ const debug = require('debug')('app:userUtil');
 const debugdb = require('debug')('app:db');
 const Joi = require('Joi');
 const bcrypt = require('bcrypt');
-
+const jwt = require('jsonwebtoken');
 const saltRound = 12;
 
 const validateUser = (user) => {
