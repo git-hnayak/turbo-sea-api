@@ -89,6 +89,7 @@ const createUser = (req) => {
         })
         .then((hash) => {
             user.password = hash;
+            debug('Hash pwd: ', user.password);
             return saveNewUser(user);
         })
         .then((res) => {

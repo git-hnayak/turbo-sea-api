@@ -6,6 +6,8 @@ const debug = require('debug')('app:startup');
 const morgan = require('morgan');
 const pug = require('pug');
 const config = require('config');
+const passport = require('passport');
+const UserModel = require('./model/users');
 
 const secret = config.get('secret_key');
 console.log('Secret Key: ', secret);
@@ -13,6 +15,10 @@ console.log('Secret Key: ', secret);
 //Router modules
 const homeRouter = require('./router/homeRouter');
 const usersRouter = require('./router/usersRouter');
+
+//Passport Auth Middlewares
+
+
 
 //Miscellaneous
 const app = express();
@@ -32,6 +38,18 @@ app.use(express.static('public')); //for serving static files
 if (environment === 'development') {
     app.use(morgan('tiny'));
 }
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function (user, done) {
+    done(null, user.phone);
+});
+
+passport.deserializeUser(function (phone, done) {
+    UserModel.find(id, function (err, user) {
+        done(err, user);
+    });
+});
 
 //Routes
 app.use('/', homeRouter);
