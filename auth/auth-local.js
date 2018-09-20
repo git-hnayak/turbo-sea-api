@@ -14,6 +14,10 @@ passport.use(new LocalStrategy({
     let userVal = {};
     UserModel.findOne({phone})
     .then((result) => {
+        if (!result) {
+            debug('Error in auth', result);
+            return done(null, false, { message: 'Incorrect phone or password.' });
+        }
         debug('User from db: ', result);
         userVal = result;
         return bcrypt.compare(password, result.password);
@@ -25,7 +29,7 @@ passport.use(new LocalStrategy({
             return done(null, userVal, { message: 'Logged In Successfully'});
         }
     }).catch((err) => {
-        debug('Error while authenticating ' + err);
+        debug('Error while authenticating catch ' + err);
         return done(err, null, { message: 'Error while logging into system'});
     })
 }));

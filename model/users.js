@@ -5,7 +5,9 @@ const userSchema = new mongoose.Schema({
     username: String,
     password: String,
     role: { type: [String], enum: ['ADMIN', 'AGENT', 'SELLER', 'BUYER', 'INVESTOR'] },
-    createddate: { type: Date, default: Date.now()}
+    createddate: { type: Date, default: Date.now()},
+    loginfailurecount: { type: Number, default: 0 },
+    status: { type: Boolean, default: false }
 });
 
 const UserModel = mongoose.model('user', userSchema);

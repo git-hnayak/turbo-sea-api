@@ -39,14 +39,14 @@ if (environment === 'development') {
     app.use(morgan('tiny'));
 }
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 
 passport.serializeUser(function (user, done) {
     done(null, user.phone);
 });
 
 passport.deserializeUser(function (phone, done) {
-    UserModel.find(id, function (err, user) {
+    UserModel.find(phone, function (err, user) {
         done(err, user);
     });
 });
